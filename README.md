@@ -1,6 +1,7 @@
 flashcard_app
 =============
 
-Change for Change's Sake MERGE CONFLICT 
+
+MERGE CONFLICT Change for Change's Sake MERGE CONFLICT 
 
 Ruby Flashcards
