@@ -4,15 +4,11 @@ require 'debugger'
 class FlashCardStack
   attr_reader :stack
   def initialize
-    @stack = []
-    counter = 0
-    definition = ''
-    term = ''
-    File.open("flashcards.txt").readlines.each do |line|
-      definition = line.chomp if counter % 3 == 0
-      term = line.chomp if counter % 3 == 1
-      @stack << Card.new(term: term, definition: definition) if counter % 3 == 2
-      counter += 1
+    @stack = [] 
+    File.open("flashcards.txt") do |file|
+      file.each_slice(3) do |slice|
+        @stack << Card.new(definition: slice[0].chomp, term: slice[1].chomp) 
+      end
     end
   end
 
@@ -27,3 +23,11 @@ class Card
   end
 
 end
+
+
+# File.open("flashcards.txt").readlines.each do |line|
+#       definition = line.chomp if counter % 3 == 0
+#       term = line.chomp if counter % 3 == 1
+#       @stack << Card.new(term: term, definition: definition) if counter % 3 == 2
+#       counter += 1
+#     end

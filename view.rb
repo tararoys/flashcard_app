@@ -1,5 +1,5 @@
 # view.rb
-
+require 'debugger'
 class View
 
   def welcome
