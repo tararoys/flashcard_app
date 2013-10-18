@@ -25,9 +25,4 @@ class Card
 end
 
 
-# File.open("flashcards.txt").readlines.each do |line|
-#       definition = line.chomp if counter % 3 == 0
-#       term = line.chomp if counter % 3 == 1
-#       @stack << Card.new(term: term, definition: definition) if counter % 3 == 2
-#       counter += 1
-#     end
+
