@@ -14,7 +14,7 @@ class FlashCardController
     view = View.new
     view.welcome 
     while true 
-      view.question(flash_card_stack.sample)
+      view.question(flash_card_stack.stack.sample)
     end
   end
 
@@ -23,6 +23,4 @@ class FlashCardController
 end
 
 controller = FlashCardController.new
-
-
-
+controller.run
