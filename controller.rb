@@ -13,9 +13,9 @@ class FlashCardController
   def run
     view = View.new
     view.welcome 
-    while true 
+    quit = false
+    while !quit 
       quit = view.question(flash_card_stack.stack.sample)
-      break if quit
     end
 
     view.quit
