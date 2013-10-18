@@ -3,15 +3,17 @@ require 'debugger'
 class View
 
   def welcome
-    puts "Welcome to flashcards: type the correct term"
+    puts "Welcome to flashcards! Type the correct term: "
   end
 
   def question(card)
     puts "Definition: \n" + card.definition
     answer = get_input
-    
+    return "remove" if answer == card.term
     until answer == card.term || answer == 'quit'
-      puts "Incorrect! Try again \n\n"
+      puts "Incorrect! Try again"
+      card.add_miss
+      puts "You have guessed #{card.missed_guesses} times\n\n"
       answer = get_input
     end
 
@@ -21,7 +23,7 @@ class View
 
   def get_input
     print "Guess: "
-    gets.chomp
+    $stdin.gets.chomp
   end
 
   def quit

@@ -1,4 +1,5 @@
 # controller.rb
+require 'debugger'
 require_relative 'view.rb'
 require_relative 'model.rb'
 
@@ -6,8 +7,8 @@ require_relative 'model.rb'
 class FlashCardController
   attr_reader :flash_card_stack
   attr_accessor :done
-  def initialize
-    @flash_card_stack = FlashCardStack.new
+  def initialize(file)
+    @flash_card_stack = FlashCardStack.new(file)
     @done = false
   end
 
@@ -17,7 +18,15 @@ class FlashCardController
     view.welcome 
     quit = false
     while !done 
-      @done = view.question(flash_card_stack.stack.sample) == 'quit'
+      card = flash_card_stack.stack.sample
+      answer = view.question(card)
+      @done = answer == 'quit'
+      if answer == "remove"
+        puts "\n\nYou got it right on the first try!  We are removing this card from the stack.\n\n" 
+        flash_card_stack.remove(card)
+      end
+
+      #reach into stack and remove card if return
     end
 
     view.quit
@@ -27,5 +36,5 @@ class FlashCardController
 
 end
 
-controller = FlashCardController.new
+controller = FlashCardController.new(ARGV[0])
 controller.run
